@@ -32,7 +32,7 @@ public class ArcadeDrive extends Command {
     if (Math.abs(value) < limit) return 0;
     else return value;
   }
-
+//yeet
   // Clipping function, prevents overpowering.
   private double clip(double value) {
     if (boosted) { // Boosted, clips at 1.00
