@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 // External.
-import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.TankDrive;;
 
 /**
  * Drivetrain subsystem. Controls the robot's movement across the field.
@@ -74,7 +74,7 @@ public class Drivetrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    this.setDefaultCommand(new ArcadeDrive());
+    this.setDefaultCommand(new TankDrive());
   }
   
 }

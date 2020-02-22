@@ -10,14 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArcadeDrive extends Command {
+public class TankDrive extends Command {
    
   // Variable declarations for processing.
-  boolean boosted;
-  double throttle, balance;
+  double LeftVertical, RightVertical;
   double powerLeft, powerRight;
 
-  public ArcadeDrive() {
+  public TankDrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.drivetrain);
   }
@@ -35,16 +34,10 @@ public class ArcadeDrive extends Command {
 //yeet
   // Clipping function, prevents overpowering.
   private double clip(double value) {
-    if (boosted) { // Boosted, clips at 1.00
-      if (value > 1) return 1;
-      else if (value < -1) return -1;
-      else return value;
-    } else { // Not boosted, clips at 0.75
       if (value > 0.75) return 0.75;
       else if (value < -0.75) return -0.75;
       else return value;
     }
-  }
 
   // Scaling function, changes "jumpiness factor".
   private double scale(double value, double mult) {
@@ -56,16 +49,11 @@ public class ArcadeDrive extends Command {
   protected void execute() {
 
     // Obtain target values from controller.
-    throttle = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(1), 0.125), 1);
-    balance = scale(deadband(Robot.oi.driverJoystick.getRawAxis(2), 0.15), 0.5);
-    boosted = Robot.oi.driverButtonRightBumper.get();
-
-    // Compute power values.
-    powerLeft = clip(throttle + balance);
-    powerRight = clip(throttle - balance);
+    LeftVertical = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(1), 0.125), 1);
+    RightVertical = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(3), 0.125), 1);
 
     // Set drivetrain power.
-    Robot.drivetrain.setPower(powerLeft, powerRight);
+    Robot.drivetrain.setPower(clip(LeftVertical), clip(RightVertical));
 
   }
 
