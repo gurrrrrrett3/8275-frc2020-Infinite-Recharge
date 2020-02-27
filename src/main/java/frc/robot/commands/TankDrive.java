@@ -10,13 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArcadeDrive extends Command {
+public class TankDrive extends Command {
    
   // Variable declarations for processing.
-  double throttle, balance;
+  double LeftVertical, RightVertical;
   double powerLeft, powerRight;
 
-  public ArcadeDrive() {
+  public TankDrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.drivetrain);
   }
@@ -31,7 +31,7 @@ public class ArcadeDrive extends Command {
     if (Math.abs(value) < limit) return 0;
     else return value;
   }
-
+//yeet
   // Clipping function, prevents overpowering.
   private double clip(double value) {
       if (value > 0.75) return 0.75;
@@ -49,15 +49,11 @@ public class ArcadeDrive extends Command {
   protected void execute() {
 
     // Obtain target values from controller.
-    throttle = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(1), 0.125), 1);
-    balance = scale(deadband(Robot.oi.driverJoystick.getRawAxis(2), 0.15), 0.5);
-    
-    // Compute power values.
-    powerLeft = clip(throttle + balance);
-    powerRight = clip(throttle - balance);
+    LeftVertical = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(1), 0.125), 1);
+    RightVertical = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(3), 0.125), 1);
 
     // Set drivetrain power.
-    Robot.drivetrain.setPower(powerLeft, powerRight);
+    Robot.drivetrain.setPower(clip(LeftVertical), clip(RightVertical));
 
   }
 
