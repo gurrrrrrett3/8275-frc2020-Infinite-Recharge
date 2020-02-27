@@ -13,7 +13,6 @@ import frc.robot.Robot;
 public class ArcadeDrive extends Command {
    
   // Variable declarations for processing.
-  boolean boosted;
   double throttle, balance;
   double powerLeft, powerRight;
 
@@ -35,16 +34,10 @@ public class ArcadeDrive extends Command {
 
   // Clipping function, prevents overpowering.
   private double clip(double value) {
-    if (boosted) { // Boosted, clips at 1.00
-      if (value > 1) return 1;
-      else if (value < -1) return -1;
-      else return value;
-    } else { // Not boosted, clips at 0.75
       if (value > 0.75) return 0.75;
       else if (value < -0.75) return -0.75;
       else return value;
     }
-  }
 
   // Scaling function, changes "jumpiness factor".
   private double scale(double value, double mult) {
@@ -58,8 +51,7 @@ public class ArcadeDrive extends Command {
     // Obtain target values from controller.
     throttle = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(1), 0.125), 1);
     balance = scale(deadband(Robot.oi.driverJoystick.getRawAxis(2), 0.15), 0.5);
-    boosted = Robot.oi.driverButtonRightBumper.get();
-
+    
     // Compute power values.
     powerLeft = clip(throttle + balance);
     powerRight = clip(throttle - balance);
