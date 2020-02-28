@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
 
 // Commands.
-import frc.robot.commands.Autonomous;
+import frc.robot.commands.Party;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new Autonomous());
+    m_chooser.setDefaultOption("Party", new Party());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
