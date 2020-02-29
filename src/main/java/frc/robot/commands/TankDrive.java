@@ -50,7 +50,7 @@ public class TankDrive extends Command {
 
     // Obtain target values from controller.
     LeftVertical = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(1), 0.125), 1);
-    RightVertical = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(3), 0.125), 1);
+    RightVertical = scale(deadband(-Robot.oi.driverJoystick.getRawAxis(5), 0.125), 1);
 
     // Set drivetrain power.
     Robot.drivetrain.setPower(clip(LeftVertical), clip(RightVertical));

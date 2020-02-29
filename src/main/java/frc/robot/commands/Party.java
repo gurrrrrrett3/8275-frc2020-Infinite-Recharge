@@ -30,9 +30,12 @@ public class Party extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
 
-    addSequential(new DriveTimed(1, 1, 1));
-    addSequential(new DriveTimed(1, 1, -1));
-    addSequential(new DriveTimed(1, -1, 1));
+    addSequential(new DriveTimed(2, 0.5, 0.5)); //foward
+    addSequential(new DriveTimed(2, 0, 0)); //wait
+    addSequential(new DriveTimed(1.3, -0.25, 0.25)); //turn
+    addSequential(new DriveTimed(3, 0.5, 0.5)); //foward
+    addSequential(new DriveTimed(0.7, -0.25, 0.25)); //turn
+
 
     
     }
